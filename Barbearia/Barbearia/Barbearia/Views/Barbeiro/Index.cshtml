@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Barbearia.Models.modelBarbeiro>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="animated animatedFadeInUp fadeInUp">
+    <h2>Clientes</h2>
+
+    @if (Session["tipoLogado1"] != null)
+    {
+        <p>
+            @Html.ActionLink("Adicionar barbeiro", "cadBarbeiro")
+        </p>
+    }
+    <br />
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.codBarbeiro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeBarbeiro)
+            </th>
+            @if (Session["tipoLogado1"] != null)
+            {
+                <th></th>
+            }
+            </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.codBarbeiro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeBarbeiro)
+            </td>
+                @if (Session["tipoLogado1"] != null)
+                {
+                    <td>
+                        @Html.ActionLink("Editar", "atualizarBarbeiro", new { id = item.codBarbeiro }) |
+
+                        @Html.ActionLink("Excluir", "excluirBarbeiro", new { id = item.codBarbeiro })
+                    </td>
+                }
+        </tr>
+        }
+
+    </table>
+</div>

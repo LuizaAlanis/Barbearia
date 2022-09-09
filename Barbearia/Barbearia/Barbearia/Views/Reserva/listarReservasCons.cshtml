@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Barbearia.Models.modelReserva>
+
+@{
+    ViewBag.Title = "Reservas";
+}
+
+<div class="animated animatedFadeInUp fadeInUp">
+    <h2>Reservas</h2>
+
+    @if (Session["tipoLogado1"] != null)
+    {
+        <p>
+            @Html.ActionLink("Reservar um horário", "cadReserva", "Reserva")
+        </p>
+    }
+    <br />
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.codReserva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataReserva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horaReserva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeBarbeiro)
+            </th>
+            @if (Session["tipoLogado1"] != null)
+            {
+                <th></th>
+            }
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.codReserva)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataReservaF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.horaReserva)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeCli)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeBarbeiro)
+        </td>
+        @if (Session["tipoLogado1"] != null)
+        {
+            <td>
+                @Html.ActionLink("Atualizar", "editarReservas", new { id = item.codReserva }) |
+                @Html.ActionLink("Excluir", "excluirReserva", new { id = item.codReserva }, new { onclick = "return confirm('Deseja realmente excluir?');" })
+            </td>
+        }
+        </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,61 @@
+﻿@model Barbearia.Models.modelReserva
+
+
+@{
+    ViewBag.Title = "Reservar";
+}
+<div class="animated animatedFadeInUp fadeInUp">
+    <h2>Cadastrar</h2>
+
+    @using (Html.BeginForm("Agenda"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Reserva</h4>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.dataReserva, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.dataReserva, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.horaReserva, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.horaReserva, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.codCli, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("cliente", null, "Escolha o cliente", new { @class = "form-control" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.codBarbeiro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("barbeiro", null, "Escolha o barbeiro ", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Cadastar" class="button1" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Voltar para a lista", "listarReservasCons")
+    </div>
+    <div>
+        @ViewBag.msg
+    </div>
+</div>

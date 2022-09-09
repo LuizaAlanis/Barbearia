@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Barbearia.Models.modelCliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="animated animatedFadeInUp fadeInUp">
+    <h2>Clientes</h2>
+
+    @if (Session["tipoLogado1"] != null)
+    {
+        <p>
+            @Html.ActionLink("Adicionar cliente", "cadCliente")
+        </p>
+    }
+    <br />
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.codCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefoneCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.celularCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.emailCli)
+            </th>
+            @if (Session["tipoLogado1"] != null)
+            {
+                <th></th>
+            }
+            </tr>
+            
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.codCli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeCli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefoneCli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.celularCli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.emailCli)
+            </td>
+            @if (Session["tipoLogado1"] != null)
+            {
+                <td>
+                    @Html.ActionLink("Atualizar", "atualizarCliente", new { id = item.codCli }) |
+                    @Html.ActionLink("Excluir", "excluirCliente", new { id = item.codCli }, new { onclick = "return confirm('Deseja realmente excluir?');" })
+                </td>
+            }
+        </tr>
+        }
+
+    </table>
+</div>
